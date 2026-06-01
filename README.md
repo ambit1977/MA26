@@ -41,9 +41,17 @@ npm run build
 
 ## iPhoneでホーム画面に追加
 
-1. `npm run dev` または本番ビルドをHTTPS環境で配信します。
+1. GitHub PagesなどのHTTPS環境でアプリを開きます。
 2. iPhone Safariでアプリを開きます。
 3. 共有ボタンから「ホーム画面に追加」を選びます。
 4. アプリ名は `MA26 Okinawa` として表示されます。
 
 Service Workerは本番ビルド時に登録されます。開発サーバーでは通常のブラウザ更新を優先するため登録しません。
+
+GitHub Pages URL:
+
+```text
+https://ambit1977.github.io/MA26/
+```
+
+公開版には `.gitignore` している `public/attendees.local.json` は含めません。参加者名簿を含むPWAを使う場合は、ローカルで `npm run fetch:attendees` を実行してから本番ビルドを配信してください。

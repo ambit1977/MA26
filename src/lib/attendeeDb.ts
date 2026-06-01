@@ -84,7 +84,7 @@ export async function clearAttendeeDb() {
 }
 
 export async function tryLoadLocalAttendeeJson(options: { bypassCache?: boolean } = {}) {
-  const response = await fetch("/attendees.local.json", options.bypassCache ? { cache: "reload" } : undefined);
+  const response = await fetch(`${import.meta.env.BASE_URL}attendees.local.json`, options.bypassCache ? { cache: "reload" } : undefined);
   if (!response.ok) return null;
   return (await response.json()) as {
     rawText?: string;

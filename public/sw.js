@@ -1,16 +1,17 @@
-const CACHE_NAME = "ma26-okinawa-v2";
-const APP_SHELL = [
-  "/",
-  "/index.html",
-  "/manifest.webmanifest",
-  "/icon.svg",
-  "/apple-touch-icon.svg",
-  "/attendees.local.json"
-];
+const CACHE_NAME = "ma26-okinawa-v3";
+const SCOPE_URL = self.registration.scope;
+const SCOPE_PATH = new URL(SCOPE_URL).pathname;
+const ATTENDEES_PATH = new URL("attendees.local.json", SCOPE_URL).pathname;
+const APP_SHELL = ["", "index.html", "manifest.webmanifest", "icon.svg", "apple-touch-icon.svg"].map(
+  (path) => new URL(path, SCOPE_URL).pathname
+);
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)).then(() => self.skipWaiting())
+    caches
+      .open(CACHE_NAME)
+      .then((cache) => cache.addAll(APP_SHELL).then(() => cache.add(ATTENDEES_PATH).catch(() => undefined)))
+      .then(() => self.skipWaiting())
   );
 });
 
@@ -33,15 +34,15 @@ self.addEventListener("fetch", (event) => {
       fetch(event.request)
         .then((response) => {
           const copy = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put("/", copy));
+          caches.open(CACHE_NAME).then((cache) => cache.put(SCOPE_PATH, copy));
           return response;
         })
-        .catch(() => caches.match("/") || caches.match("/index.html"))
+        .catch(() => caches.match(SCOPE_PATH) || caches.match(new URL("index.html", SCOPE_URL).pathname))
     );
     return;
   }
 
-  if (url.pathname === "/attendees.local.json") {
+  if (url.pathname === ATTENDEES_PATH) {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
@@ -51,7 +52,7 @@ self.addEventListener("fetch", (event) => {
           }
           return response;
         })
-        .catch(() => caches.match(event.request) || caches.match("/attendees.local.json"))
+        .catch(() => caches.match(event.request) || caches.match(ATTENDEES_PATH))
     );
     return;
   }
