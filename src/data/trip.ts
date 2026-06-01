@@ -1,0 +1,482 @@
+import {
+  BedDouble,
+  BriefcaseBusiness,
+  CalendarDays,
+  Home,
+  Plane,
+  TentTree,
+} from "lucide-react";
+
+export const days = [
+  { key: "day1", label: "1日目", date: "6/2(火)", theme: "移動・開幕", icon: Plane },
+  { key: "day2", label: "2日目", date: "6/3(水)", theme: "集中参加", icon: BriefcaseBusiness },
+  { key: "day3", label: "3日目", date: "6/4(木)", theme: "公式レク", icon: CalendarDays },
+  { key: "day4", label: "4日目", date: "6/5(金)", theme: "JUNGLIA", icon: TentTree },
+  { key: "day5", label: "5日目", date: "6/6(土)", theme: "那覇・帰京", icon: Home },
+] as const;
+
+export type DayKey = (typeof days)[number]["key"];
+
+export type ScheduleRow = {
+  time: string;
+} & Record<DayKey, [string, string]>;
+
+export type SessionDetail = {
+  day: DayKey;
+  time: string;
+  kind: string;
+  title: string;
+  subtitle?: string;
+  speakers?: string[];
+  note?: string;
+};
+
+export const schedule: ScheduleRow[] = [
+  {
+    time: "早朝",
+    day1: ["出発・成田へ", "東京都内 → 成田空港"],
+    day2: ["朝食・会場へ", "ホテル／ラグナガーデン周辺"],
+    day3: ["朝食・最終日準備", "ホテル／会場"],
+    day4: ["チェックアウト・荷物最終確認", "宿泊先"],
+    day5: ["起床・朝食", "那覇市内宿泊先"],
+  },
+  {
+    time: "08:15",
+    day1: ["Peach MM501 出発", "成田 NRT"],
+    day2: ["Wake Up with／朝セッション", "メイン会場"],
+    day3: ["Wake Up with／朝セッション", "メイン会場"],
+    day4: ["公式アフターアジェンダ準備", "集合場所確認"],
+    day5: ["午前プラン開始", "おもろまち／壺屋／おきみゅー等"],
+  },
+  {
+    time: "11:25",
+    day1: ["Peach MM501 那覇着", "那覇空港 OKA"],
+    day2: ["午前セッション・ネットワーキング", "会場"],
+    day3: ["ラウンドテーブル〜ランチ", "会場"],
+    day4: ["JUNGLIAへ移動・視察", "名護・今帰仁方面"],
+    day5: ["自由行動・土産候補確認", "那覇市内"],
+  },
+  {
+    time: "12:30",
+    day1: ["受付開始。ブランド参加者は13:10までに受付完了", "ラグナガーデンホテル"],
+    day2: ["ネットワーキングランチ", "会場"],
+    day3: ["ランチ・午後レク準備", "会場"],
+    day4: ["JUNGLIA特別セッション・パーク内ガイド", "JUNGLIA沖縄"],
+    day5: ["空港へ向かう準備", "那覇市内 → 那覇空港"],
+  },
+  {
+    time: "14:00",
+    day1: ["オープニング〜キーノート", "メイン会場"],
+    day2: ["午後セッション・プレゼンテーション", "メイン会場"],
+    day3: ["公式レクリエーション開始", "沖縄県内各コース"],
+    day4: ["JUNGLIA視察継続", "JUNGLIA沖縄"],
+    day5: ["那覇空港到着・荷物預け・土産確認", "那覇空港 OKA"],
+  },
+  {
+    time: "16:50",
+    day1: ["夕方セッション・ネットワーキング", "メイン会場"],
+    day2: ["終盤セッション・ネットワーキング", "メイン会場"],
+    day3: ["公式レクリエーション終了目安", "沖縄県内各コース"],
+    day4: ["JUNGLIA視察終盤・帰路へ", "JUNGLIA → 那覇方面"],
+    day5: ["Peach MM506 出発", "那覇 OKA"],
+  },
+  {
+    time: "19:00",
+    day1: ["移動〜ネットワーキングパーティ", "会場／パーティ会場"],
+    day2: ["ネットワーキングパーティ", "パーティ会場"],
+    day3: ["ホテル戻り・後泊・翌日準備", "宜野湾"],
+    day4: ["那覇空港到着予定。宿泊先へ移動", "那覇空港 → 那覇市内"],
+    day5: ["成田到着前後", "機内"],
+  },
+  {
+    time: "19:30",
+    day1: ["ネットワーキングパーティ", "会場"],
+    day2: ["パーティ継続", "会場"],
+    day3: ["夕食・荷物整理・充電", "ホテル"],
+    day4: ["夕食・シャワー・休息", "那覇市内宿泊先"],
+    day5: ["Peach MM506 成田着", "成田 NRT"],
+  },
+  {
+    time: "21:00以降",
+    day1: ["希望者のみナイトアジェンダ", "指定会場"],
+    day2: ["希望者のみナイトプログラム", "指定会場"],
+    day3: ["早めに就寝推奨", "ホテル"],
+    day4: ["完全休息。翌日の帰京準備", "那覇市内宿泊先"],
+    day5: ["帰宅", "成田 → 東京都内"],
+  },
+];
+
+export const sessionDetails: SessionDetail[] = [
+  {
+    day: "day1",
+    time: "12:30",
+    kind: "受付",
+    title: "受付開始",
+    note: "ブランド参加者は13:10のブランドオンリーレセプション開始までに受付完了。",
+  },
+  {
+    day: "day1",
+    time: "13:10",
+    kind: "Reception",
+    title: "ブランドオンリーレセプション",
+    subtitle: "顧客起点のエンゲージメント基盤",
+    speakers: ["吉永 敦 / Braze", "村口 賢一郎 / エウレカ"],
+  },
+  {
+    day: "day1",
+    time: "13:55",
+    kind: "Opening",
+    title: "オープニングリマークス",
+    speakers: ["中野 博文 / ナノベーション", "高 由香梨 / MC"],
+  },
+  {
+    day: "day1",
+    time: "14:15",
+    kind: "Keynote #1",
+    title: "戦略と現実のギャップを越え、事業成長を牽引する",
+    subtitle: "これからの10年に必要とされるマーケティング人材",
+    speakers: ["野上 麻理 / Haleonジャパン", "幸村 太郎 / 味の素", "加藤 健史 / ジャパンエンターテイメント", "富永 朋信 / Preferred Networks"],
+  },
+  {
+    day: "day1",
+    time: "15:25",
+    kind: "Premium #1",
+    title: "「最適化」の先に、マーケティングが向かう場所",
+    subtitle: "CX・EXを進化させるデジタル接客",
+    speakers: ["中村 旭宏 / livepass"],
+  },
+  {
+    day: "day1",
+    time: "16:40",
+    kind: "Orientation",
+    title: "ヤング・クリエイティブ・アジェンダ supported by FMX",
+    speakers: ["萩原 幸也 / リクルート", "里村 明洋 / Visa", "澤本 嘉光 / dentsu Japan", "須田 伸 / ハイネケン・ジャパン"],
+  },
+  {
+    day: "day1",
+    time: "17:15",
+    kind: "20min #1",
+    title: "クリエイティブ制作進化論",
+    subtitle: "AIがマーケターの役割を塗り替える",
+    speakers: ["簑田 咲 / サイバーエージェント"],
+  },
+  {
+    day: "day1",
+    time: "17:55",
+    kind: "20min #2",
+    title: "広告効果をコンテンツの力で変える。",
+    speakers: ["津田 一成 / テレビ東京コミュニケーションズ", "三宅 優樹 / テレビ東京コミュニケーションズ"],
+  },
+  {
+    day: "day1",
+    time: "18:15",
+    kind: "10min #1",
+    title: "熱狂を生み出し、事業成果に繋げるSNSマーケティング戦略",
+    speakers: ["熊谷 聰威 / FinT"],
+  },
+  {
+    day: "day1",
+    time: "18:25",
+    kind: "10min #2",
+    title: "AI・データ武装のノバセルが最後にたどり着くマーケター進化論",
+    speakers: ["古屋 明日華 / ノバセル"],
+  },
+  {
+    day: "day1",
+    time: "18:35",
+    kind: "10min #3",
+    title: "Mercari Adsと1st-partyデータ活用",
+    speakers: ["赤星 大偉 / メルカリ"],
+  },
+  {
+    day: "day1",
+    time: "18:45",
+    kind: "30min #2",
+    title: "ファンダムインサイト起点のプランニング発想",
+    speakers: ["小倉 美穂 / ソフトバンク", "植田 みさ / 電通", "新城 早紀 / 電通"],
+  },
+  {
+    day: "day1",
+    time: "19:30",
+    kind: "Party",
+    title: "ネットワーキングパーティ",
+    subtitle: "ラグナガーデンホテル プールサイドパーティ",
+  },
+  {
+    day: "day2",
+    time: "06:30",
+    kind: "Morning",
+    title: "モーニングセッション",
+    speakers: ["井上 慎也 / SBCメディカルグループ", "小椋 一平 / 資生堂ジャパン", "高田 基位 / メリーチョコレートカムパニー", "渡邉 英右 / サンリオ", "白澤 勉 / 日清食品"],
+  },
+  {
+    day: "day2",
+    time: "08:45",
+    kind: "Keynote #2",
+    title: "価値創造、事業成長、組織変革",
+    subtitle: "チェンジメーカーになるマーケターの条件",
+    speakers: ["槇 亮次 / Mizkan", "足立 光 / ファミリーマート"],
+  },
+  {
+    day: "day2",
+    time: "09:55",
+    kind: "Premium #2",
+    title: "丸亀製麺が実践するBtoEtoC戦略",
+    subtitle: "従業員の内発的動機を刺激するデータ活用",
+    speakers: ["小國 晴郎 / プレイド", "間部 徹 / 丸亀製麺"],
+  },
+  {
+    day: "day2",
+    time: "10:25",
+    kind: "20min #3",
+    title: "AI時代、顧客体験をどう構想し、育てるか",
+    speakers: ["川島 聖巨 / レモンタルト"],
+  },
+  {
+    day: "day2",
+    time: "11:30",
+    kind: "10min #4",
+    title: "ショート動画の正解",
+    speakers: ["余頃 沙貴 / ワンメディア"],
+  },
+  {
+    day: "day2",
+    time: "11:40",
+    kind: "10min #5",
+    title: "AIインタビューが起こすリサーチ革命",
+    speakers: ["浜岡 宏樹 / ユニーリサーチ"],
+  },
+  {
+    day: "day2",
+    time: "11:50",
+    kind: "10min #6",
+    title: "多言語の世界を広げる翻訳体験",
+    speakers: ["佐藤 弦 / Wovn Technologies"],
+  },
+  {
+    day: "day2",
+    time: "12:10",
+    kind: "Lunch",
+    title: "ランチプレゼンテーション",
+    subtitle: "グローバルベストプラクティス、ガーディアンクイズほか",
+    speakers: ["真嶋 良和 / enableX", "小林 裕 / イー・ガーディアン"],
+  },
+  {
+    day: "day2",
+    time: "13:40",
+    kind: "20min #4",
+    title: "マーケターの進化はリフォームから始まる",
+    speakers: ["高木 一成 / トレジャーデータ", "池照 直樹 / ゴルト"],
+  },
+  {
+    day: "day2",
+    time: "14:00",
+    kind: "10min #7",
+    title: "AI検索元年。サービスが選ばれる新しいルール",
+    speakers: ["田口 雅光 / GMO NIKKO"],
+  },
+  {
+    day: "day2",
+    time: "14:30",
+    kind: "30min #5",
+    title: "おーいお茶の進化と意思決定の資産化",
+    speakers: ["平尾 喜昭 / サイカ", "志田 光正 / 伊藤園"],
+  },
+  {
+    day: "day2",
+    time: "15:00",
+    kind: "20min #5",
+    title: "データとAIで創る次世代マーケ戦略",
+    speakers: ["田邊 湧志 / マネックス証券", "藤原 賢太 / Macbee Planet"],
+  },
+  {
+    day: "day2",
+    time: "16:30",
+    kind: "10min #9",
+    title: "音声AIエージェントとAIアバター",
+    speakers: ["渡邊 大介 / ジールス"],
+  },
+  {
+    day: "day2",
+    time: "16:40",
+    kind: "10min #10",
+    title: "楽天データが導くマーケティング進化論",
+    speakers: ["林 雄之 / 楽天グループ"],
+  },
+  {
+    day: "day2",
+    time: "18:45",
+    kind: "Party",
+    title: "ネットワーキングパーティ",
+    subtitle: "ぎのわんトロピカルビーチ BBQスタイルパーティ",
+  },
+  {
+    day: "day3",
+    time: "05:00",
+    kind: "Optional",
+    title: "サンライズ企画",
+    subtitle: "日の出スポットへキャンピングカーで移動",
+    note: "動きやすい服装・靴を推奨。",
+  },
+  {
+    day: "day3",
+    time: "06:00",
+    kind: "Optional",
+    title: "サンライズサウナ",
+    subtitle: "アウトドアサウナ企画",
+    note: "水着・サウナハットを忘れずに。",
+  },
+  {
+    day: "day3",
+    time: "09:00",
+    kind: "Keynote #3",
+    title: "マーケターだからこそできる新価値創造",
+    speakers: ["江田 壮寿 / 丸亀製麺", "安井 卓 / LIXIL", "大村 和顕 / ライオン"],
+  },
+  {
+    day: "day3",
+    time: "10:10",
+    kind: "Roundtable",
+    title: "AI時代、自分のチーム／組織をどう進化させるか",
+    speakers: ["伊藤 弘明 / オプト"],
+  },
+  {
+    day: "day3",
+    time: "12:00",
+    kind: "Wrap-up",
+    title: "ラップアップセッション",
+    speakers: ["小倉 遵也 / 富士通", "松村 眞依子 / 日産自動車", "ルービン 利恵 / レノボジャパン", "鎌田 滋之 / サンマルクホールディングス"],
+  },
+  {
+    day: "day3",
+    time: "12:45",
+    kind: "Award",
+    title: "ヤング・クリエイティブ・アジェンダ 結果発表",
+    speakers: ["萩原 幸也 / リクルート", "澤本 嘉光 / dentsu Japan", "須田 伸 / ハイネケン・ジャパン"],
+  },
+  {
+    day: "day3",
+    time: "13:15",
+    kind: "Award",
+    title: "Agenda Award 表彰式",
+  },
+  {
+    day: "day3",
+    time: "14:00",
+    kind: "Recreation",
+    title: "公式レクリエーション",
+    subtitle: "ブランド参加者必須。沖縄の自然・文化・歴史を体感する全9コース程度。",
+    note: "多くのコースは那覇空港19:00到着予定。",
+  },
+  {
+    day: "day4",
+    time: "After Day",
+    kind: "JUNGLIA",
+    title: "JUNGLIA沖縄コース",
+    subtitle: "特別セッションとパーク内ガイド",
+    note: "ツアー後の那覇空港到着予定は19:00。6/5夜は回復優先。",
+  },
+  {
+    day: "day4",
+    time: "After Day",
+    kind: "Golf",
+    title: "知花ゴルフコース",
+    subtitle: "米軍基地内ショートコースで9ホール",
+    note: "プレー後の那覇空港到着予定は16:00。",
+  },
+  {
+    day: "day4",
+    time: "After Day",
+    kind: "Culture",
+    title: "沖縄レクリエーション各コース",
+    subtitle: "さんご畑、漁船クルーズ、首里城、斎場御嶽、特別講座など",
+    note: "コースにより那覇空港到着予定は17:30〜19:00。",
+  },
+  {
+    day: "day5",
+    time: "午前〜昼",
+    kind: "Free",
+    title: "那覇市内ショート滞在",
+    subtitle: "おもろまち、壺屋、おきみゅー、土産購入など軽めに",
+    note: "16:50 OKA発。14時台には空港入り。",
+  },
+];
+
+export const flights = [
+  {
+    type: "往路",
+    flight: "Peach Aviation MM501",
+    route: "東京都発 沖縄行き",
+    date: "6月2日(火)",
+    from: "NRT",
+    to: "OKA",
+    depart: "08:15",
+    arrive: "11:25",
+    duration: "3時間10分",
+    code: "CNJU5D",
+    note: "到着後、荷物受取と会場移動。12:30受付開始、13:10までの受付完了を強く意識。",
+  },
+  {
+    type: "復路",
+    flight: "Peach Aviation MM506",
+    route: "沖縄発 東京都行き",
+    date: "6月6日(土)",
+    from: "OKA",
+    to: "NRT",
+    depart: "16:50",
+    arrive: "19:30",
+    duration: "2時間40分",
+    code: "W565E7",
+    note: "午前〜昼に那覇市内を軽く回れる。14時台には那覇空港へ入り、荷物・土産・休憩を処理。",
+  },
+] as const;
+
+export const officialLinks = [
+  {
+    label: "公式スケジュール",
+    url: "https://marketingagenda.jp/okinawa/schedule/",
+    note: "Day1〜Day3、After Dayの公式時間確認用",
+  },
+  {
+    label: "参加者専用サイト",
+    url: "https://mailh.nanovation-jp.com/ma26_participants",
+    note: "宿泊・アクセス登録、特別企画申込、注意事項の確認用",
+  },
+  {
+    label: "参加者一覧",
+    url: "https://marketingagenda.jp/okinawa/attendees/",
+    note: "Basic認証あり。認証情報はこのアプリに保存しません",
+  },
+] as const;
+
+export const checklistItems = [
+  { id: "flight", label: "フライト確認", group: "移動" },
+  { id: "after", label: "公式アフターアジェンダ申込確認", group: "公式企画" },
+  { id: "luggage", label: "6/5荷物取り扱い確認", group: "荷物" },
+  { id: "hotel-june5", label: "6/5夜宿泊先確認", group: "宿泊" },
+  { id: "cards", label: "名刺", group: "ビジネス" },
+  { id: "pc", label: "PC", group: "ガジェット" },
+  { id: "charger", label: "充電器", group: "ガジェット" },
+  { id: "battery", label: "モバイルバッテリー", group: "ガジェット" },
+  { id: "jcb", label: "JCBゴールドカード", group: "支払い" },
+  { id: "id", label: "身分証", group: "移動" },
+  { id: "junglia-wear", label: "JUNGLIA用服装", group: "服装" },
+  { id: "repellent", label: "虫よけ", group: "服装" },
+  { id: "sunscreen", label: "日焼け止め", group: "服装" },
+  { id: "souvenir", label: "土産用スペース", group: "帰路" },
+  { id: "pwa", label: "PWAホーム画面追加確認", group: "PWA" },
+] as const;
+
+export const noteSections = [
+  { key: "free", title: "自由メモ", placeholder: "確認事項、思いつき、当日の変更点など" },
+  { key: "people", title: "会いたい人", placeholder: "会社名、氏名、話したいテーマ" },
+  { key: "deals", title: "商談メモ", placeholder: "商談内容、次アクション、温度感" },
+  { key: "souvenir", title: "土産メモ", placeholder: "買うもの、渡す相手、予算" },
+  { key: "transport", title: "移動メモ", placeholder: "バス、タクシー、集合場所、ホテル導線" },
+] as const;
+
+export const todayCards = [
+  { title: "Day1", text: "12:30受付開始。ブランド参加者は13:10までに受付完了。", icon: BriefcaseBusiness },
+  { title: "Day3", text: "14:00〜17:00は公式レクリエーション。", icon: CalendarDays },
+  { title: "After Day", text: "JUNGLIAコースは那覇空港19:00到着予定。6/5夜は回復重視。", icon: BedDouble },
+] as const;

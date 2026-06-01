@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <rect width="180" height="180" rx="40" fill="#f8fafc"/>
+  <path d="M0 116c22-12 41-16 58-11 21 6 38 23 60 26 23 3 43-8 62-26v75H0Z" fill="#0f766e"/>
+  <path d="M0 99c22-17 44-24 66-20 19 4 32 17 50 21 22 4 43-5 64-22v43c-22 14-43 19-63 16-22-3-38-19-59-25-18-5-38-2-58 11Z" fill="#06b6d4"/>
+  <path d="M121 39c9 9 14 20 14 34-14-2-25-7-34-15 0 15-3 29-9 42l-13-5c6-14 9-28 7-43-11 4-23 3-36-1 10-10 21-15 35-17-5-8-12-15-21-21 19 1 33 6 42 16 5-9 10-16 15-20Z" fill="#164e63"/>
+  <circle cx="47" cy="45" r="16" fill="#facc15"/>
+  <text x="90" y="153" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="800" fill="#ffffff">MA26</text>
+</svg>
