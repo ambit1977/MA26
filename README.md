@@ -55,3 +55,16 @@ https://ambit1977.github.io/MA26/
 ```
 
 公開版には `.gitignore` している `public/attendees.local.json` は含めません。参加者名簿を含むPWAを使う場合は、ローカルで `npm run fetch:attendees` を実行してから本番ビルドを配信してください。
+
+VPS URL:
+
+```text
+https://ambit.go2020.tokyo/ma26/
+```
+
+VPS向けビルド:
+
+```bash
+npm run fetch:attendees
+npm run build:vps
+```
