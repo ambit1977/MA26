@@ -474,9 +474,3 @@ export const noteSections = [
   { key: "souvenir", title: "土産メモ", placeholder: "買うもの、渡す相手、予算" },
   { key: "transport", title: "移動メモ", placeholder: "バス、タクシー、集合場所、ホテル導線" },
 ] as const;
-
-export const todayCards = [
-  { title: "Day1", text: "12:30受付開始。ブランド参加者は13:10までに受付完了。", icon: BriefcaseBusiness },
-  { title: "Day3", text: "14:00〜17:00は公式レクリエーション。", icon: CalendarDays },
-  { title: "After Day", text: "JUNGLIAコースは那覇空港19:00到着予定。6/5夜は回復重視。", icon: BedDouble },
-] as const;

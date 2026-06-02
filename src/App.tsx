@@ -31,7 +31,6 @@ import {
   officialLinks,
   schedule,
   sessionDetails,
-  todayCards,
   type DayKey,
 } from "./data/trip";
 import { attendeesFromRecords, defaultAttendeeText, filterAttendees, parseAttendees, type Attendee } from "./lib/attendees";
@@ -58,20 +57,27 @@ function AppHero({ setTab }: { setTab: (tab: TabKey) => void }) {
             Marketing Agenda Okinawa 2026
           </div>
           <h1 className="max-w-3xl text-4xl font-black leading-tight tracking-normal sm:text-5xl">
-            WORK → FIELD STUDY → RESET → RETURN
+            MA26 Okinawa
+            <span className="block text-2xl font-black text-cyan-50/90 sm:text-3xl">旅程・名簿・持ち物</span>
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-7 text-cyan-50/90">
-            受付、公式プログラム、JUNGLIA視察、那覇での回復、帰京までをiPhoneで見やすくまとめた個人旅程PWA。
+            受付、公式プログラム、JUNGLIA視察、那覇での回復、帰京まで。現地で迷わないための個人用コックピット。
           </p>
           <div className="mt-5 flex flex-wrap gap-2">
-            <Button onClick={() => setTab("schedule")} className="bg-white text-slate-950 hover:bg-cyan-50">
+            <button
+              onClick={() => setTab("schedule")}
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white px-5 py-2 text-sm font-black text-slate-950 shadow-sm transition hover:bg-cyan-50 active:scale-[0.98]"
+            >
               <CalendarDays className="h-4 w-4" />
-              今日の日程
-            </Button>
-            <Button onClick={() => setTab("check")} variant="outline" className="border-white/20 bg-white/10 text-white hover:bg-white/15">
+              スケジュールを見る
+            </button>
+            <button
+              onClick={() => setTab("check")}
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/25 bg-white/10 px-5 py-2 text-sm font-black text-white transition hover:bg-white/15 active:scale-[0.98]"
+            >
               <ClipboardCheck className="h-4 w-4" />
               出発前確認
-            </Button>
+            </button>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-2 sm:gap-3">
@@ -97,18 +103,45 @@ function AppHero({ setTab }: { setTab: (tab: TabKey) => void }) {
 }
 
 function HomeView({ setTab }: { setTab: (tab: TabKey) => void }) {
+  const homeHighlights = [
+    {
+      title: "到着日の受付",
+      meta: "6/2(火) 12:30 / ラグナガーデンホテル",
+      text: "ブランド参加者は13:10までに受付完了。",
+      tab: "schedule" as TabKey,
+      icon: CalendarDays,
+    },
+    {
+      title: "復路フライト",
+      meta: "6/6(土) 16:50 OKA → 19:30 NRT",
+      text: "14時台には那覇空港へ。荷物・土産・休憩を先に処理。",
+      tab: "flights" as TabKey,
+      icon: Plane,
+    },
+    {
+      title: "現地メモ",
+      meta: "会いたい人 / 商談 / 土産 / 移動",
+      text: "思いついたことをすぐ残す。",
+      tab: "notes" as TabKey,
+      icon: NotebookPen,
+    },
+  ];
+
   return (
     <div className="space-y-5">
       <AppHero setTab={setTab} />
       <div className="grid gap-3 md:grid-cols-3">
-        {todayCards.map((item) => {
+        {homeHighlights.map((item) => {
           const Icon = item.icon;
           return (
-            <Card key={item.title} className="p-4">
+            <button key={item.title} onClick={() => setTab(item.tab)} className="rounded-2xl text-left transition active:scale-[0.99]">
+              <Card className="h-full p-4">
               <Icon className="mb-3 h-6 w-6 text-teal-700" />
               <h3 className="font-black text-slate-950">{item.title}</h3>
+              <p className="mt-1 text-xs font-black leading-5 text-slate-500">{item.meta}</p>
               <p className="mt-2 text-sm leading-6 text-slate-600">{item.text}</p>
             </Card>
+            </button>
           );
         })}
       </div>
